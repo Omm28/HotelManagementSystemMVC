@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rooms</title>
+</head>
+<body>
+    <h1>Available Rooms</h1>
+    <ul>
+        <th:block th:each="room : ${rooms}">
+            <li>
+                <p th:text="${room.type}">Room Type</p>
+                <p th:text="${room.pricePerNight}">Price per night</p>
+                <p th:text="${room.description}">Description</p>
+            </li>
+        </th:block>
+    </ul>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Login - ChillStays</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <nav>
+        <div class="nav-container">
+            <a href="/" class="brand-logo">Luxury Hotels</a>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/booking">Book Now</a></li>
+                <li><a href="/login">Login</a></li>
+            </ul>
+        </div>
+    </nav>  
+
+<div class="login-wrapper">
+    <form th:action="@{/login}" method="post">
+        <h2>Login to Your Account</h2>
+
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" required>
+
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" required>
+
+        <button type="submit">Login</button>
+
+        <p class="signup-note">Don't have an account? <a href="/register">Sign up</a></p>
+
+    </form>
+</div>
+
+</body>
+</html>
