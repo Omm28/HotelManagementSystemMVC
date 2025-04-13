@@ -16,13 +16,17 @@ public class User {
     @Column(nullable = false)
     private String password;
 
+    @Column(nullable = false) // Added role field, cannot be null
+    private String role;
+
     // Constructors
     public User() {
     }
 
-    public User(String username, String password) {
+    public User(String username, String password, String role) { // Added role to constructor
         this.username = username;
         this.password = password;
+        this.role = role;
     }
 
     // Getters and Setters
@@ -46,8 +50,15 @@ public class User {
         this.password = password;
     }
 
-    public String getRole() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getRole'");
+    public String getRole() { // Implemented getRole()
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }
