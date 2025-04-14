@@ -219,27 +219,28 @@ footer p {
     margin: 0;
 }
 
-/* Login Page Styles */
+/* Modern Login Page */
 .login-wrapper {
     max-width: 400px;
-    margin: 80px auto;
-    background-color: white;
+    margin: 100px auto;
+    background-color: #ffffff;
     padding: 40px 30px;
-    border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
     font-family: 'Poppins', sans-serif;
 }
 
 .login-form h2 {
-    margin-bottom: 25px;
     text-align: center;
     color: #1D3557;
+    margin-bottom: 20px;
 }
 
 .login-form label {
-    font-weight: 600;
     display: block;
-    margin: 10px 0 5px;
+    margin: 12px 0 4px;
+    color: #333;
+    font-weight: 600;
 }
 
 .login-form input {
@@ -247,29 +248,35 @@ footer p {
     padding: 12px;
     margin-bottom: 15px;
     border: 1px solid #ccc;
-    border-radius: 8px;
-    font-size: 14px;
+    border-radius: 5px;
+    font-size: 16px;
 }
 
 .login-form button {
     width: 100%;
-    background-color: #f1c40f;
+    padding: 14px;
+    background-color: #F1C40F;
     color: #1D3557;
     border: none;
-    padding: 12px;
+    border-radius: 5px;
+    font-size: 18px;
     font-weight: bold;
-    border-radius: 8px;
     cursor: pointer;
-    transition: background 0.3s ease;
+    transition: background-color 0.3s;
 }
 
 .login-form button:hover {
-    background-color: #e67e22;
-    color: white;
+    background-color: #e0b10f;
 }
 
 .signup-note {
     text-align: center;
     margin-top: 20px;
     font-size: 14px;
+}
+
+.error-message {
+    color: red;
+    text-align: center;
+    margin-bottom: 10px;
 }

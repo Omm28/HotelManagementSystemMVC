@@ -4,13 +4,14 @@
     <meta charset="UTF-8">
     <title>Login - ChillStays</title>
     <link rel="stylesheet" href="/css/styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600;700&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
-
-    <nav>
+    <!-- Simple Navbar -->
+    <nav class="navbar">
         <div class="nav-container">
-            <a href="/" class="brand-logo">Luxury Hotels</a>
+            <a href="/" class="brand-logo">ChillStays</a>
             <ul class="nav-links">
                 <li><a href="/">Home</a></li>
                 <li><a href="/booking">Book Now</a></li>
@@ -19,22 +20,24 @@
         </div>
     </nav>
 
-<div class="login-wrapper">
-    <form th:action="@{/login}" method="post">
-        <h2>Login to Your Account</h2>
+    <!-- Login Form Container -->
+    <div class="login-wrapper">
+        <form class="login-form" th:action="@{/login}" method="post">
+            <h2>Login to Your Account</h2>
 
-        <label for="username">Username</label>
-        <input type="text" id="username" name="username" required>
+            <!-- Show error message, if available -->
+            <p th:if="${param.error}" class="error-message">Invalid username or password.</p>
 
-        <label for="password">Password</label>
-        <input type="password" id="password" name="password" required>
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" required />
 
-        <button type="submit">Login</button>
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required />
 
-        <p class="signup-note">Don't have an account? <a href="/register">Sign up</a></p>
+            <button type="submit">Login</button>
 
-    </form>
-</div>
-
+            <p class="signup-note">Don't have an account? <a th:href="@{/register}">Sign Up</a></p>
+        </form>
+    </div>
 </body>
 </html>
