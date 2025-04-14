@@ -1,0 +1,26 @@
+<!-- templates/booking.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Book a Hotel</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <div th:replace="fragments/navbar :: *"></div>
+
+<h1>Available Hotels</h1>
+
+<form method="get" th:action="@{/booking}">
+    <input type="text" name="keyword" placeholder="Search hotels..." th:value="${keyword}">
+    <button type="submit">Search</button>
+</form>
+
+<ul>
+    <li th:each="hotel : ${hotels}">
+        <span th:text="${hotel.name}"></span> -
+        <span th:text="${hotel.location}"></span>
+        <a th:href="@{'/booking/select/' + ${hotel.id}}">Book Now</a>
+    </li>
+</ul>
+</body>
+</html>

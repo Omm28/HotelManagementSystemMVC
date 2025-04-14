@@ -19,4 +19,9 @@ public class HotelService {
     public List<Hotel> getAllHotels() {
         return hotelRepository.findAll();
     }
+
+    public List<Hotel> searchHotelsByName(String keyword) {
+        return hotelRepository.findByNameContainingIgnoreCase(keyword);
+    }
+
 }

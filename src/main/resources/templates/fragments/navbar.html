@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark px-4">
+    <a class="navbar-brand" href="/" style="font-weight: bold;">HotelHub</a>
+
+    <div class="collapse navbar-collapse">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+            <li class="nav-item">
+                <a class="nav-link" href="/" th:href="@{/}">Home</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="/booking" th:href="@{/booking}">Book</a>
+            </li>
+
+        </ul>
+
+        <ul class="navbar-nav ms-auto">
+
+            <!-- If user is logged in -->
+            <li class="nav-item" th:if="${#request.remoteUser != null}">
+                <a class="nav-link disabled" href="#">Hi, <b th:text="${#request.remoteUser}"></b></a>
+            </li>
+            <li class="nav-item" th:if="${#request.remoteUser != null}">
+                <a class="nav-link" th:href="@{/logout}">Logout</a>
+            </li>
+
+            <!-- If user is

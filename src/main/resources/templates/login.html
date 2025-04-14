@@ -8,17 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
-    <!-- Simple Navbar -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="/" class="brand-logo">ChillStays</a>
-            <ul class="nav-links">
-                <li><a href="/">Home</a></li>
-                <li><a href="/booking">Book Now</a></li>
-                <li><a href="/login">Login</a></li>
-            </ul>
-        </div>
-    </nav>
+    <div th:replace="fragments/navbar :: *"></div>
+
 
     <!-- Login Form Container -->
     <div class="login-wrapper">
