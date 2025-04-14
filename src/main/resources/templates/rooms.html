@@ -1,33 +1,93 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Rooms</title>
+    <title>Room Search</title>
+    <link rel="stylesheet" href="path/to/your/styles.css" />
   </head>
-  <nav>
-    <div class="nav-container">
-        <a href="/" class="brand-logo">ChillStays</a>
-        <ul class="nav-links">
-            <li><a href="/">Home</a></li>
-            <li><a href="/booking">Book Now</a></li>
-            <li><a href="/login">Login</a></li>
-        </ul>
+  <body>
+    <!-- Navbar -->
+    <nav>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/booking">Book Now</a></li>
+        <li><a href="/login">Login</a></li>
+      </ul>
+    </nav>
+
+    <div class="container">
+      <!-- Room Search Form -->
+      <h2>Find Your Room</h2>
+      <form action="/searchRooms" method="get">
+        <div class="search-options">
+          <label for="num_of_bedrooms">Number of Bedrooms:</label>
+          <select name="num_of_bedrooms" id="num_of_bedrooms">
+            <option value="1">1 Bedroom</option>
+            <option value="2">2 Bedrooms</option>
+            <option value="3">3 Bedrooms</option>
+            <option value="4">4 Bedrooms</option>
+          </select>
+        </div>
+
+        <div class="search-options">
+          <label for="location">Location:</label>
+          <input
+            type="text"
+            name="location"
+            id="location"
+            placeholder="Enter location"
+            required
+          />
+        </div>
+
+        <div class="search-options">
+          <button type="submit">Search</button>
+        </div>
+      </form>
+
+      <!-- Display Available Rooms -->
+      <h3>Available Rooms</h3>
+      <div class="room-list">
+        <div th:if="${rooms.isEmpty()}">
+          <p>No rooms available for the selected criteria.</p>
+        </div>
+
+        <div th:each="room : ${rooms}">
+          <div class="room-item">
+            <h4>
+              Room Type: <span th:text="${room.roomType}">Standard Room</span>
+            </h4>
+            <p>
+              Price per night: $<span th:text="${room.pricePerNight}">100</span>
+            </p>
+            <p>
+              Description:
+              <span th:text="${room.description}">Comfortable room.</span>
+            </p>
+            <p>
+              Number of Bedrooms:
+              <span th:text="${room.numOfBedrooms}">2</span>
+            </p>
+            <p>
+              Available:
+              <span th:text="${room.available == 1 ? 'Yes' : 'No'}">Yes</span>
+            </p>
+
+            <div th:if="${room.available == 1}">
+              <a
+                th:href="@{'/bookRoom/' + ${hotelId} + '/' + ${room.id}}"
+                class="book-now-button"
+                >Book Now</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-</nav>
 
-    <!-- Scripts for Bootstrap functionality -->
-
-    <h1>Available Rooms</h1>
-    <ul>
-      <th:block th:each="room : ${rooms}">
-        <li>
-          <p th:text="${room.type}">Room Type</p>
-          <p th:text="${room.pricePerNight}">Price per night</p>
-          <p th:text="${room.description}">Description</p>
-        </li>
-      </th:block>
-    </ul>
+    <footer>
+      <p>&copy; 2025 Hotel Booking</p>
+    </footer>
   </body>
-
 </html>

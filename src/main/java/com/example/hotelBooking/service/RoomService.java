@@ -2,7 +2,6 @@ package com.example.hotelBooking.service;
 
 import com.example.hotelBooking.model.Room;
 import com.example.hotelBooking.repository.RoomRepository;
-
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,11 +15,16 @@ public class RoomService {
         this.roomRepository = roomRepository;
     }
 
-    public List<Room> getAvailableRooms(Long hotelId, String type) {
-        if (type != null && !type.isEmpty()) {
-            return roomRepository.findByHotelIdAndTypeAndAvailableTrue(hotelId, type);
-        } else {
-            return roomRepository.findByHotelIdAndAvailableTrue(hotelId);
-        }
+    public List<Room> searchAvailableRooms(int numberOfBeds, String location) {
+        return roomRepository.findByAvailableIsTrueAndNumberOfBedsAndHotel_LocationContaining(
+                numberOfBeds, location);
+    }
+
+    public Room getRoomById(Long roomId) {
+        return roomRepository.findById(roomId).orElse(null);
+    }
+
+    public List<Room> getRoomsByHotelId(Long hotelId) {
+        return roomRepository.findByHotelIdAndAvailableTrue(hotelId);
     }
 }
