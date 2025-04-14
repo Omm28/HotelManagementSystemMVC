@@ -1,22 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Rooms</title>
-</head>
-<body>
-    <div th:replace="fragments/navbar :: *"></div>
+  </head>
+  <nav>
+    <div class="nav-container">
+        <a href="/" class="brand-logo">ChillStays</a>
+        <ul class="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/booking">Book Now</a></li>
+            <li><a href="/login">Login</a></li>
+        </ul>
+    </div>
+</nav>
+
+    <!-- Scripts for Bootstrap functionality -->
 
     <h1>Available Rooms</h1>
     <ul>
-        <th:block th:each="room : ${rooms}">
-            <li>
-                <p th:text="${room.type}">Room Type</p>
-                <p th:text="${room.pricePerNight}">Price per night</p>
-                <p th:text="${room.description}">Description</p>
-            </li>
-        </th:block>
+      <th:block th:each="room : ${rooms}">
+        <li>
+          <p th:text="${room.type}">Room Type</p>
+          <p th:text="${room.pricePerNight}">Price per night</p>
+          <p th:text="${room.description}">Description</p>
+        </li>
+      </th:block>
     </ul>
-</body>
+  </body>
+
 </html>

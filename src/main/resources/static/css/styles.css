@@ -15,10 +15,11 @@ body {
 }
 
 /* Navbar Styles */
+/* Navbar Styles */
 nav {
     background-color: #1D3557;
     /* Deep Navy */
-    padding: 20px 0;
+    padding: 15px 0;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
@@ -62,6 +63,7 @@ nav {
     color: #F1C40F;
     /* Golden Yellow */
 }
+
 
 /* Hero Section */
 .hero {
@@ -279,4 +281,71 @@ footer p {
     color: red;
     text-align: center;
     margin-bottom: 10px;
+}
+
+/* Booking Page Styles */
+.booking-page {
+    background-color: #fff;
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.booking-page h2 {
+    font-size: 36px;
+    font-weight: 700;
+    color: #1D3557;
+    /* Deep Navy */
+    margin-bottom: 40px;
+}
+
+.booking-form {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: #F9F9F9;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.booking-form label {
+    display: block;
+    margin: 12px 0 4px;
+    color: #333;
+    font-weight: 600;
+}
+
+.booking-form input,
+.booking-form select {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.booking-form button {
+    width: 100%;
+    padding: 14px;
+    background-color: #F1C40F;
+    /* Golden Yellow */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.booking-form button:hover {
+    background-color: #FF5733;
+    /* Bright Coral */
+}
+
+.booking-note {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 16px;
+    color: #555;
 }

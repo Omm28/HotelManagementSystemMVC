@@ -28,6 +28,7 @@ public class Booking {
     @Column
     private String status;
 
+    // Getters and setters
     public LocalDate getCheckInDate() {
         return checkInDate;
     }
@@ -52,5 +53,11 @@ public class Booking {
         this.status = status;
     }
 
-    // Getters and setters
+    public Hotel getHotel() {
+        return hotel; // Getter for hotel
+    }
+
+    public void setHotel(Hotel hotel) {
+        this.hotel = hotel; // Setter for hotel
+    }
 }

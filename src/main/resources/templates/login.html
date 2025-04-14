@@ -1,34 +1,50 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>Login - ChillStays</title>
-    <link rel="stylesheet" href="/css/styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600;700&display=swap" rel="stylesheet">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-</head>
-<body>
-    <div th:replace="fragments/navbar :: *"></div>
-
+    <link rel="stylesheet" href="/css/styles.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  </head>
+  <body>
+    <nav>
+      <div class="nav-container">
+        <a href="/" class="brand-logo">ChillStays</a>
+        <ul class="nav-links">
+          <li><a href="/">Home</a></li>
+          <li><a href="/booking">Book Now</a></li>
+          <li><a href="/login">Login</a></li>
+        </ul>
+      </div>
+    </nav>
+    <!-- Scripts for Bootstrap functionality -->
 
     <!-- Login Form Container -->
     <div class="login-wrapper">
-        <form class="login-form" th:action="@{/login}" method="post">
-            <h2>Login to Your Account</h2>
+      <form class="login-form" th:action="@{/login}" method="post">
+        <h2>Login to Your Account</h2>
 
-            <!-- Show error message, if available -->
-            <p th:if="${param.error}" class="error-message">Invalid username or password.</p>
+        <!-- Show error message, if available -->
+        <p th:if="${param.error}" class="error-message">
+          Invalid username or password.
+        </p>
 
-            <label for="username">Username</label>
-            <input type="text" id="username" name="username" required />
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" required />
 
-            <label for="password">Password</label>
-            <input type="password" id="password" name="password" required />
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" required />
 
-            <button type="submit">Login</button>
+        <button type="submit">Login</button>
 
-            <p class="signup-note">Don't have an account? <a th:href="@{/register}">Sign Up</a></p>
-        </form>
+        <p class="signup-note">
+          Don't have an account? <a th:href="@{/register}">Sign Up</a>
+        </p>
+      </form>
     </div>
-</body>
+  </body>
 </html>

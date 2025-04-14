@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Search Hotels</title>
+    <title>Search Bookings</title>
     <link rel="stylesheet" href="/css/styles.css" />
     <link
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap"
@@ -112,47 +112,47 @@
     </nav>
 
     <div class="container">
-      <h1>Search Hotels</h1>
+      <h1>Search Bookings</h1>
 
+      <!-- Single Smart Search Form -->
       <form method="get" action="/booking">
         <div class="search-container">
           <input
             type="text"
             name="query"
-            placeholder="Search by hotel name or location"
+            placeholder="Search by hotel name, location, or number of rooms"
             th:value="${query}"
-            <!--
-            Displays
-            the
-            current
-            search
-            query
-            --
           />
           <button type="submit">Search</button>
         </div>
       </form>
 
-      <!-- Hotel Results -->
-      <h2>Available Hotels</h2>
+      <!-- Booking Results -->
+      <h2>Booking Results</h2>
       <table>
         <thead>
           <tr>
             <th>Hotel</th>
             <th>Location</th>
-            <th>Actions</th>
+            <th>Room</th>
+            <th>Check-in</th>
+            <th>Check-out</th>
+            <th>Status</th>
           </tr>
         </thead>
         <tbody>
-          <tr th:each="hotel : ${hotels}">
-            <td th:text="${hotel.name}">Hotel Name</td>
-            <td th:text="${hotel.location}">Location</td>
-            <td>
-              <a th:href="@{'/booking/room/' + ${hotel.id}}">Book Now</a>
-            </td>
+          <tr th:each="booking : ${bookings}">
+            <td th:text="${booking.hotel.name}"></td>
+            <td th:text="${booking.hotel.location}"></td>
+            <td
+              th:text="'Room with ' + ${booking.room.numOfBedrooms} + ' bedroom(s)'"
+            ></td>
+            <td th:text="${booking.checkInDate}"></td>
+            <td th:text="${booking.checkOutDate}"></td>
+            <td th:text="${booking.status}"></td>
           </tr>
-          <tr th:if="${#lists.isEmpty(hotels)}">
-            <td colspan="3">No hotels found matching your search.</td>
+          <tr th:if="${#lists.isEmpty(bookings)}">
+            <td colspan="6">No bookings found matching your search.</td>
           </tr>
         </tbody>
       </table>
