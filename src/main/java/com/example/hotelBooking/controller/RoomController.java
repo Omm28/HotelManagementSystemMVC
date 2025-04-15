@@ -1,6 +1,5 @@
 package com.example.hotelBooking.controller;
 
-import com.example.hotelBooking.model.Hotel;
 import com.example.hotelBooking.model.Room;
 import com.example.hotelBooking.service.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
