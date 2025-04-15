@@ -16,22 +16,21 @@ public class User {
     @Column(nullable = false)
     private String password;
 
-    @Column(nullable = false) // Added role field, cannot be null
-    private String role;
-
-    // Constructors
     public User() {
     }
 
-    public User(String username, String password, String role) { // Added role to constructor
+    public User(String username, String password) {
         this.username = username;
         this.password = password;
-        this.role = role;
     }
 
     // Getters and Setters
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getUsername() {
@@ -50,15 +49,4 @@ public class User {
         this.password = password;
     }
 
-    public String getRole() { // Implemented getRole()
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 }

@@ -1,13 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
   <head>
+    <title>Login - ChillStays</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Login - ChillStays</title>
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-    />
     <style>
       body {
         font-family: "Poppins", sans-serif;
@@ -22,7 +18,6 @@
         padding: 18px 0;
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
         width: 100%;
-        position: fixed;
         top: 0;
         z-index: 1000;
       }
@@ -72,111 +67,113 @@
         background-color: rgba(255, 204, 0, 0.1);
       }
 
-      .login-wrapper {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        padding-top: 70px;
-      }
-
-      .login-form {
-        background-color: #ffffff;
-        padding: 40px;
-        border-radius: 12px;
-        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+      .container {
         width: 90%;
-        max-width: 400px;
-        text-align: center;
+        max-width: 900px;
+        margin: 80px auto 40px auto;
+        background-color: #ffffff;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
       }
 
-      .login-form h2 {
+      h2 {
+        text-align: center;
         color: #003366;
-        margin-bottom: 30px;
+        margin-bottom: 25px;
         font-size: 28px;
         font-weight: 600;
+        border-bottom: 2px solid #e0e0e0;
+        padding-bottom: 15px;
       }
 
-      .login-form label {
+      .form-group {
+        margin-bottom: 20px;
+      }
+
+      label {
         display: block;
-        margin-top: 20px;
-        text-align: left;
-        color: #555;
-        font-size: 16px;
+        margin-bottom: 8px;
         font-weight: 500;
+        color: #444;
       }
 
-      .login-form input {
+      input[type="text"],
+      input[type="password"] {
         width: 100%;
         padding: 12px;
-        margin-top: 8px;
-        margin-bottom: 20px;
         border: 1px solid #e0e0e0;
         border-radius: 6px;
         font-size: 16px;
         transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        box-sizing: border-box;
       }
 
-      .login-form input:focus {
+      input[type="text"]:focus,
+      input[type="password"]:focus {
         border-color: #ffcc00;
         outline: none;
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
       }
 
-      .login-form button {
+      button {
         background-color: #ffcc00;
         color: #003366;
-        padding: 14px 24px;
-        border: none;
-        border-radius: 6px;
-        cursor: pointer;
-        font-size: 18px;
         font-weight: 600;
+        font-size: 18px;
+        cursor: pointer;
+        border: none;
+        transition: background-color 0.3s ease, transform 0.2s ease,
+          box-shadow 0.2s ease;
+        padding: 14px 24px;
+        border-radius: 6px;
         width: 100%;
-        transition: background-color 0.3s ease, color 0.3s ease,
-          transform 0.2s ease, box-shadow 0.2s ease;
-        margin-top: 10px;
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
       }
 
-      .login-form button:hover {
+      button:hover {
         background-color: #ffb800;
-        color: #002244;
-        transform: scale(1.04);
+        transform: scale(1.02);
         box-shadow: 0 3px 7px rgba(0, 0, 0, 0.15);
       }
 
-      .login-form button:active {
+      button:active {
         transform: scale(1);
         box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
       }
 
-      .error-message {
+      .alert {
+        padding: 15px;
+        background-color: #fff0f0;
         color: #ff4444;
         margin-bottom: 20px;
-        font-size: 16px;
-        padding: 12px;
-        background-color: #fff0f0;
-        border: 1px solid #e0e0e0;
         border-radius: 6px;
+        font-weight: 500;
+      }
+
+      .success {
+        padding: 15px;
+        background-color: #f0fff0;
+        color: #44aa44;
+        margin-bottom: 20px;
+        border-radius: 6px;
+        font-weight: 500;
+      }
+
+      .register-link {
         text-align: center;
+        margin-top: 20px;
       }
 
-      .signup-note {
-        margin-top: 25px;
-        font-size: 16px;
-        color: #555;
-      }
-
-      .signup-note a {
-        color: #ffcc00;
+      .register-link a {
+        color: #003366;
         text-decoration: none;
         font-weight: 600;
         transition: color 0.2s ease;
       }
 
-      .signup-note a:hover {
-        color: #ffb800;
+      .register-link a:hover {
+        color: #ffcc00;
         text-decoration: underline;
       }
     </style>
@@ -192,21 +189,41 @@
         </ul>
       </div>
     </nav>
-    <div class="login-wrapper">
-      <form class="login-form" th:action="@{/login}" method="post">
-        <h2>Login to Your Account</h2>
-        <p th:if="${param.error}" class="error-message">
-          Invalid username or password.
-        </p>
-        <label for="username">Username</label>
-        <input type="text" id="username" name="username" required />
-        <label for="password">Password</label>
-        <input type="password" id="password" name="password" required />
+
+    <div class="container">
+      <h2>Login</h2>
+
+      <div th:if="${param.error}" class="alert">
+        Invalid username or password.
+      </div>
+
+      <div th:if="${param.logout}" class="success">
+        You have been logged out.
+      </div>
+
+      <div th:if="${param.registered}" class="success">
+        Registration successful! Please login.
+      </div>
+
+      <form th:action="@{/login}" method="post">
+        <div class="form-group">
+          <label for="username">Username:</label>
+          <input type="text" id="username" name="username" required autofocus />
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password:</label>
+          <input type="password" id="password" name="password" required />
+        </div>
+
         <button type="submit">Login</button>
-        <p class="signup-note">
-          Don't have an account? <a th:href="@{/register}">Sign Up</a>
-        </p>
       </form>
+
+      <div class="register-link">
+        <p>
+          Don't have an account? <a th:href="@{/register}">Register here</a>
+        </p>
+      </div>
     </div>
   </body>
 </html>

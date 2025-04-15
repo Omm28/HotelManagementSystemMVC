@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Dashboard - ChillStays</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      body {
+        font-family: "Poppins", sans-serif;
+        background-color: #f0f4f8;
+        margin: 0;
+        padding: 0;
+        color: #333;
+      }
+
+      nav {
+        background-color: #003366;
+        padding: 18px 0;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        width: 100%;
+        top: 0;
+        z-index: 1000;
+      }
+
+      .nav-container {
+        width: 90%;
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 20px;
+      }
+
+      .brand-logo {
+        font-size: 32px;
+        font-weight: 700;
+        text-decoration: none;
+        color: #ffcc00;
+        letter-spacing: 2px;
+        transition: color 0.2s ease;
+      }
+
+      .brand-logo:hover {
+        color: #ffb800;
+      }
+
+      .nav-links {
+        list-style: none;
+        display: flex;
+        gap: 35px;
+      }
+
+      .nav-links li a {
+        text-decoration: none;
+        color: #ffffff;
+        font-weight: 500;
+        font-size: 18px;
+        transition: color 0.3s ease;
+        letter-spacing: 1px;
+        padding: 8px 12px;
+        border-radius: 6px;
+      }
+
+      .nav-links li a:hover {
+        color: #ffcc00;
+        background-color: rgba(255, 204, 0, 0.1);
+      }
+
+      .container {
+        width: 90%;
+        max-width: 900px;
+        margin: 80px auto 40px auto;
+        background-color: #ffffff;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      h1 {
+        color: #003366;
+        font-size: 32px;
+        margin-bottom: 25px;
+        padding-bottom: 15px;
+        border-bottom: 2px solid #e0e0e0;
+      }
+
+      .welcome-message {
+        font-size: 20px;
+        margin-bottom: 30px;
+        color: #444;
+      }
+
+      .card {
+        background-color: #f9f9f9;
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+
+      .card h2 {
+        color: #003366;
+        font-size: 22px;
+        margin-top: 0;
+        margin-bottom: 15px;
+      }
+
+      .card p {
+        margin-bottom: 15px;
+      }
+
+      .action-button {
+        display: inline-block;
+        background-color: #ffcc00;
+        color: #003366;
+        font-weight: 600;
+        font-size: 16px;
+        padding: 10px 20px;
+        border-radius: 6px;
+        text-decoration: none;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+      }
+
+      .action-button:hover {
+        background-color: #ffb800;
+        transform: scale(1.05);
+      }
+
+      .logout-button {
+        background-color: #f44336;
+        color: white;
+        text-decoration: none;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+      }
+
+      .logout-button:hover {
+        background-color: #d32f2f;
+        transform: scale(1.05);
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <div class="nav-container">
+        <a href="/" class="brand-logo">ChillStays</a>
+        <ul class="nav-links">
+          <li><a href="/">Home</a></li>
+          <li><a href="/booking">Book Now</a></li>
+          <li>
+            <a href="/logout" class="logout-button">Logout</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="container">
+      <h1>User Dashboard</h1>
+
+      <div class="welcome-message">
+        Welcome, <span th:text="${username}">User</span>!
+      </div>
+
+      <div class="card">
+        <h2>Your Bookings</h2>
+        <p>View and manage your current and upcoming bookings.</p>
+        <a href="/bookings" class="action-button">View Bookings</a>
+      </div>
+    </div>
+  </body>
+</html>
