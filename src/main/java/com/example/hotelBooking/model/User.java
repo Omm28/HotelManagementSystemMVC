@@ -1,52 +1,53 @@
 package com.example.hotelBooking.model;
 
 import jakarta.persistence.*;
+import lombok.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.Collection;
+import java.util.Collections;
 
 @Entity
-@Table(name = "users")
-public class User {
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, unique = true)
     private String username;
 
-    @Column(nullable = false)
     private String password;
 
-    public User() {
+    // You can add email, role, etc. here if needed
+
+    // === UserDetails methods ===
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return Collections.emptyList(); // or return roles if you add them later
     }
 
-    public User(String username, String password) {
-        this.username = username;
-        this.password = password;
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
     }
 
-    // Getters and Setters
-    public Long getId() {
-        return id;
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
     }
 
-    public String getUsername() {
-        return username;
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
 }

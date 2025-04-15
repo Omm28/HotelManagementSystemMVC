@@ -199,7 +199,8 @@
     </nav>
 
     <div class="container">
-      <h2>All Rooms in Hotel</h2>
+      <h2 th:text="${hotel.name}">Hotel Name</h2>
+      <p th:text="${hotel.location}">Hotel Location</p>
       <div th:if="${not #lists.isEmpty(rooms)}">
         <p class="available-count">
           Available Rooms: <span th:text="${availableRoomsCount}">0</span>
@@ -232,9 +233,7 @@
             >
           </p>
 
-          <a
-            th:href="@{'/bookRoom/' + ${hotelId} + '/' + ${room.id}}"
-            class="book-now-button"
+          <a th:href="@{'/book/' + ${room.hotel.id} + '/' + ${room.id}}"
             >Book Now</a
           >
         </div>

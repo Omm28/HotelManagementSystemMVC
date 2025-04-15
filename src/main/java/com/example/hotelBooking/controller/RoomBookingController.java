@@ -1,45 +1,103 @@
 package com.example.hotelBooking.controller;
 
-import com.example.hotelBooking.model.Room;
-import com.example.hotelBooking.service.RoomBookingService;
-import com.example.hotelBooking.service.RoomService;
+import java.time.LocalDate;
 
+import com.example.hotelBooking.model.*;
+import com.example.hotelBooking.repository.HotelRepository;
+import com.example.hotelBooking.repository.RoomRepository;
+import com.example.hotelBooking.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/bookRoom")
+@RequestMapping("/booking")
 public class RoomBookingController {
 
-    @Autowired
-    private RoomService roomService;
+        @Autowired
+        private HotelService hotelService;
 
-    @Autowired
-    private RoomBookingService roomBookingService;
+        @Autowired
+        private UserService userService;
 
-    // Display booking form for a selected room
-    @GetMapping("/{hotelId}/{roomId}")
-    public String showBookingForm(@PathVariable Long hotelId,
-            @PathVariable Long roomId,
-            Model model) {
-        Room room = roomService.getRoomById(roomId);
-        model.addAttribute("room", room);
-        model.addAttribute("hotelId", hotelId);
-        return "roomBooking"; // Ensure you have a roomBooking.html file
-    }
+        @Autowired
+        private RoomRepository roomRepository;
 
-    // Handle booking submission
-    @PostMapping("/submit")
-    public String submitBooking(@RequestParam Long hotelId,
-            @RequestParam Long roomId,
-            @RequestParam String username,
-            @RequestParam String checkInDate,
-            @RequestParam String checkOutDate,
-            Model model) {
-        roomBookingService.saveBooking(hotelId, roomId, username, checkInDate, checkOutDate);
-        model.addAttribute("message", "Booking Successful!");
-        return "bookingSuccess"; // Ensure you have a bookingSuccess.html file
-    }
+        @Autowired
+        private RoomBookingService roomBookingService;
+
+        @Autowired
+        private HotelRepository hotelRepository;
+
+        // Show room booking page
+        @GetMapping("/booking/roomBooking/{hotelId}/{roomId}")
+        public String showRoomBookingPage(@PathVariable Long hotelId,
+                        @PathVariable Long roomId,
+                        Model model) {
+                Room room = roomRepository.findById(roomId)
+                                .orElseThrow(() -> new RuntimeException("Room not found"));
+
+                Hotel hotel = hotelRepository.findById(hotelId)
+                                .orElseThrow(() -> new IllegalArgumentException("Invalid hotel ID"));
+                model.addAttribute("hotel", hotel);
+                model.addAttribute("room", room);
+                return "roomBooking";
+        }
+
+        // Handle room booking submission
+        @PostMapping("/roomBooking/submit")
+        public String submitBooking(@RequestParam("hotelId") Long hotelId,
+                        @RequestParam("roomId") Long roomId,
+                        @RequestParam("checkInDate") String checkInDate,
+                        @RequestParam("checkOutDate") String checkOutDate,
+                        Authentication authentication,
+                        Model model) {
+
+                Hotel hotel = hotelService.getHotelById(hotelId)
+                                .orElseThrow(() -> new RuntimeException("Hotel not found"));
+                Room room = roomRepository.findById(roomId)
+                                .orElseThrow(() -> new RuntimeException("Room not found"));
+                User user = userService.findByUsername(authentication.getName())
+                                .orElseThrow(() -> new RuntimeException("User not found"));
+
+                RoomBooking booking = new RoomBooking();
+                booking.setHotel(hotel);
+                booking.setRoom(room);
+                booking.setUser(user);
+                booking.setCheckInDate(LocalDate.parse(checkInDate));
+                booking.setCheckOutDate(LocalDate.parse(checkOutDate));
+
+                roomBookingService.saveBooking(booking);
+                model.addAttribute("booking", booking);
+
+                return "bookingConfirmation";
+        }
+
+        // Optional confirm method (can be removed if not used)
+        @GetMapping("/confirm")
+        public String confirmBooking(@RequestParam("hotelId") Long hotelId,
+                        @RequestParam("roomId") Long roomId,
+                        @RequestParam("numRooms") int numRooms,
+                        Authentication authentication,
+                        Model model) {
+                Hotel hotel = hotelService.getHotelById(hotelId)
+                                .orElseThrow(() -> new RuntimeException("Hotel not found"));
+                Room room = roomRepository.findById(roomId)
+                                .orElseThrow(() -> new RuntimeException("Room not found"));
+
+                User user = userService.findByUsername(authentication.getName())
+                                .orElseThrow(() -> new RuntimeException("User not found"));
+
+                RoomBooking booking = new RoomBooking();
+                booking.setHotel(hotel);
+                booking.setRoom(room);
+                booking.setUser(user);
+
+                roomBookingService.saveBooking(booking);
+                model.addAttribute("booking", booking);
+
+                return "bookingConfirmation";
+        }
 }

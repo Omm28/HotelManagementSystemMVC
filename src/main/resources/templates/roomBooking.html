@@ -179,18 +179,18 @@
     </nav>
 
     <h2>Book Your Room</h2>
-    <form th:action="@{/bookRoom/submit}" method="post">
-      <input type="hidden" name="hotelId" th:value="${hotelId}" />
+    <form th:action="@{/roomBooking/submit}" method="post">
+      <input type="hidden" name="hotelId" th:value="${hotel.id}" />
       <input type="hidden" name="roomId" th:value="${room.id}" />
 
-      <label>Hotel ID: </label>
-      <span th:text="${hotelId}"></span><br />
+      <label>Hotel Name:</label>
+      <span th:text="${hotel.name}">Hotel Name</span><br />
 
-      <label>Room Type: </label>
-      <span th:text="${room.roomType}"></span><br />
+      <label>Room Type:</label>
+      <span th:text="${room.roomType}">Room Type</span><br />
 
-      <label>Username:</label>
-      <input type="text" name="username" required /><br />
+      <label>Price per Night:</label>
+      <span th:text="${room.pricePerNight}">100.0</span><br />
 
       <label>Check-in Date:</label>
       <input type="date" name="checkInDate" required /><br />

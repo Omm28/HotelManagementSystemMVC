@@ -16,19 +16,42 @@ public class Booking {
     @ManyToOne
     private Room room;
 
-    @Column
-    private String username; // For now until user system is fully wired
+    @ManyToOne
+    private User user;
 
-    @Column
     private LocalDate checkInDate;
-
-    @Column
     private LocalDate checkOutDate;
-
-    @Column
     private String status;
 
     // Getters and setters
+    public Long getId() {
+        return id;
+    }
+
+    public Hotel getHotel() {
+        return hotel;
+    }
+
+    public void setHotel(Hotel hotel) {
+        this.hotel = hotel;
+    }
+
+    public Room getRoom() {
+        return room;
+    }
+
+    public void setRoom(Room room) {
+        this.room = room;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     public LocalDate getCheckInDate() {
         return checkInDate;
     }
@@ -51,13 +74,5 @@ public class Booking {
 
     public void setStatus(String status) {
         this.status = status;
-    }
-
-    public Hotel getHotel() {
-        return hotel; // Getter for hotel
-    }
-
-    public void setHotel(Hotel hotel) {
-        this.hotel = hotel; // Setter for hotel
     }
 }
