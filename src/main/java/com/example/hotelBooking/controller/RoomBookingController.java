@@ -9,8 +9,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @Controller
 @RequestMapping("/bookRoom")
 public class RoomBookingController {
@@ -21,15 +19,6 @@ public class RoomBookingController {
     @Autowired
     private RoomBookingService roomBookingService;
 
-    // Display available rooms for a specific hotel
-    @GetMapping("/{hotelId}")
-    public String showRoomsInHotel(@PathVariable Long hotelId, Model model) {
-        List<Room> rooms = roomService.getRoomsByHotelId(hotelId);
-        model.addAttribute("rooms", rooms);
-        model.addAttribute("hotelId", hotelId);
-        return "rooms"; // changed from "Rooms" to "rooms"
-    }
-
     // Display booking form for a selected room
     @GetMapping("/{hotelId}/{roomId}")
     public String showBookingForm(@PathVariable Long hotelId,
@@ -37,8 +26,8 @@ public class RoomBookingController {
             Model model) {
         Room room = roomService.getRoomById(roomId);
         model.addAttribute("room", room);
-        model.addAttribute("hotelId", hotelId); // added so template gets hotelId
-        return "roomBooking";
+        model.addAttribute("hotelId", hotelId);
+        return "roomBooking"; // Ensure you have a roomBooking.html file
     }
 
     // Handle booking submission
@@ -51,6 +40,6 @@ public class RoomBookingController {
             Model model) {
         roomBookingService.saveBooking(hotelId, roomId, username, checkInDate, checkOutDate);
         model.addAttribute("message", "Booking Successful!");
-        return "bookingSuccess";
+        return "bookingSuccess"; // Ensure you have a bookingSuccess.html file
     }
 }

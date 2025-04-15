@@ -1,9 +1,22 @@
 package com.example.hotelBooking.model;
 
 public enum RoomType {
-    STANDARD,
-    DELUXE,
     SUITE,
-    FAMILY,
-    PENTHOUSE
+    PENTHOUSE,
+    SINGLE_ROOM,
+    DOUBLE_ROOM,
+    FAMILY_SUITE,
+    LUXURY_SUITE,
+    JUNIOR_SUITE,
+    EXECUTIVE_SUITE,
+    HONEYMOON_SUITE,
+    DESERT_SUITE,
+    POOLSIDE_VILLA,
+    ROYAL_SUITE,
+    DELUXE_ROOM,
+    EXECUTIVE_ROOM,
+    PRESIDENTIAL_SUITE,
+    BEACHSIDE_BUNGALOW,
+    GARDEN_VIEW_ROOM,
+    OCEAN_SUITE
 }

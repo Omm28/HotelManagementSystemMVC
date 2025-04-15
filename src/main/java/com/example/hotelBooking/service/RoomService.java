@@ -15,16 +15,11 @@ public class RoomService {
         this.roomRepository = roomRepository;
     }
 
-    public List<Room> searchAvailableRooms(int numberOfBeds, String location) {
-        return roomRepository.findByAvailableIsTrueAndNumberOfBedsAndHotel_LocationContaining(
-                numberOfBeds, location);
-    }
-
     public Room getRoomById(Long roomId) {
         return roomRepository.findById(roomId).orElse(null);
     }
 
-    public List<Room> getRoomsByHotelId(Long hotelId) {
-        return roomRepository.findByHotelIdAndAvailableTrue(hotelId);
+    public List<Room> getAllRoomsByHotelId(Long hotelId) {
+        return roomRepository.findByHotelId(hotelId);
     }
 }

@@ -1,40 +1,53 @@
 package com.example.hotelBooking.model;
 
 import jakarta.persistence.*;
+import lombok.*;
 
 @Entity
+@Table(name = "rooms")
 public class Room {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private int numberOfBeds;
-    private double price;
-    private String description;
+    @Column(name = "type")
+    @Enumerated(EnumType.STRING)
+    private RoomType roomType; // Renamed 'type' in DB to 'roomType' in Entity for clarity
+
+    @Column(name = "available")
     private boolean available;
 
-    @Enumerated(EnumType.STRING)
-    private RoomType roomType;
+    @Column(name = "price_per_night")
+    private double price;
+
+    private String description;
+
+    @Column(name = "num_of_bedrooms")
+    private Integer numOfBedrooms; // Changed to Integer to allow null if needed
 
     @ManyToOne
+    @JoinColumn(name = "hotel_id")
     private Hotel hotel;
 
-    // Getters and Setters
+    // Default Constructor
+    public Room() {
+    }
+
     public Long getId() {
         return id;
     }
 
-    public int getNumberOfBeds() {
-        return numberOfBeds;
-    }
-
-    public void setNumberOfBeds(int numberOfBeds) {
-        this.numberOfBeds = numberOfBeds;
-    }
-
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public boolean isAvailable() {
+        return available;
+    }
+
+    public void setAvailable(boolean available) {
+        this.available = available;
     }
 
     public double getPrice() {
@@ -61,19 +74,19 @@ public class Room {
         this.roomType = roomType;
     }
 
+    public Integer getNumOfBedrooms() {
+        return numOfBedrooms;
+    }
+
+    public void setNumOfBedrooms(Integer numOfBedrooms) {
+        this.numOfBedrooms = numOfBedrooms;
+    }
+
     public Hotel getHotel() {
         return hotel;
     }
 
     public void setHotel(Hotel hotel) {
         this.hotel = hotel;
-    }
-
-    public boolean isAvailable() {
-        return available;
-    }
-
-    public void setAvailable(boolean available) {
-        this.available = available;
     }
 }
