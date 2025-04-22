@@ -31,4 +31,17 @@ public class RoomBooking {
     private LocalDate checkOutDate;
 
     private String status;
+
+    @Transient
+    private Room room;
+
+    public void setRoom(Room room) {
+        this.room = room;
+        if (room != null) {
+            this.roomId = room.getId();
+            if (room.getHotel() != null) {
+                this.hotelId = room.getHotel().getId();
+            }
+        }
+    }
 }

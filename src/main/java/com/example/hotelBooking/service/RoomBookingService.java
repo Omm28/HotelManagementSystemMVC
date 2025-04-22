@@ -47,4 +47,13 @@ public class RoomBookingService {
     public List<RoomBooking> getUserBookings(String username) {
         return roomBookingRepository.findByUsername(username);
     }
+
+    public RoomBooking getBookingByReservationId(String reservationId) {
+        return roomBookingRepository.findById(reservationId).orElse(null);
+    }
+
+    @Transactional
+    public void updateBooking(RoomBooking booking) {
+        roomBookingRepository.save(booking);
+    }
 }

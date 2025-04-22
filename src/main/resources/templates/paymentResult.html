@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Payment Result - ChillStays</title>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+    />
+    <style>
+      body {
+        font-family: "Poppins", sans-serif;
+        background-color: #f0f4f8;
+        margin: 0;
+        padding: 0;
+        color: #333;
+      }
+
+      nav {
+        background-color: #003366;
+        padding: 18px 0;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        width: 100%;
+        top: 0;
+        z-index: 1000;
+      }
+
+      .nav-container {
+        width: 90%;
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 20px;
+      }
+
+      .brand-logo {
+        font-size: 32px;
+        font-weight: 700;
+        text-decoration: none;
+        color: #ffcc00;
+        letter-spacing: 2px;
+      }
+
+      .nav-links {
+        list-style: none;
+        display: flex;
+        gap: 35px;
+      }
+
+      .nav-links li a {
+        text-decoration: none;
+        color: #ffffff;
+        font-weight: 500;
+        font-size: 18px;
+      }
+
+      .container {
+        width: 90%;
+        max-width: 600px;
+        margin: 80px auto;
+        background-color: #ffffff;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+        text-align: center;
+      }
+
+      .result-icon {
+        font-size: 48px;
+        margin-bottom: 20px;
+      }
+
+      .success {
+        color: #28a745;
+      }
+
+      .failure {
+        color: #dc3545;
+      }
+
+      h2 {
+        color: #003366;
+        margin-bottom: 20px;
+        font-size: 28px;
+      }
+
+      .message {
+        font-size: 18px;
+        margin-bottom: 30px;
+        color: #666;
+      }
+
+      .action-buttons {
+        margin-top: 30px;
+      }
+
+      .action-button {
+        display: inline-block;
+        background-color: #ffcc00;
+        color: #003366;
+        padding: 14px 24px;
+        border: none;
+        border-radius: 6px;
+        font-size: 18px;
+        font-weight: 600;
+        text-decoration: none;
+        margin: 0 10px;
+        transition: background-color 0.3s ease;
+      }
+
+      .action-button:hover {
+        background-color: #ffb800;
+      }
+
+      .booking-details {
+        background-color: #f8f9fa;
+        padding: 20px;
+        border-radius: 8px;
+        margin: 30px 0;
+        text-align: left;
+      }
+
+      .detail-row {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 15px;
+        padding-bottom: 15px;
+        border-bottom: 1px solid #e0e0e0;
+      }
+
+      .detail-row:last-child {
+        border-bottom: none;
+        margin-bottom: 0;
+        padding-bottom: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <div class="nav-container">
+        <a href="/" class="brand-logo">ChillStays</a>
+        <ul class="nav-links">
+          <li><a href="/">Home</a></li>
+          <li><a href="/booking">Book Now</a></li>
+          <li><a href="/bookings">Dashboard</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="container">
+      <div
+        class="result-icon"
+        th:class="${success ? 'result-icon success' : 'result-icon failure'}"
+      >
+        <span th:text="${success ? '✓' : '✕'}"></span>
+      </div>
+
+      <h2 th:text="${success ? 'Payment Successful!' : 'Payment Failed'}">
+        Payment Result
+      </h2>
+      <p class="message" th:text="${message}">Processing result message</p>
+
+      <div class="booking-details">
+        <div class="detail-row">
+          <span>Reservation ID:</span>
+          <span th:text="${booking.reservationId}"></span>
+        </div>
+        <div class="detail-row">
+          <span>Status:</span>
+          <span th:text="${booking.status}"></span>
+        </div>
+        <div class="detail-row">
+          <span>Check-in Date:</span>
+          <span
+            th:text="${#temporals.format(booking.checkInDate, 'yyyy-MM-dd')}"
+          ></span>
+        </div>
+        <div class="detail-row">
+          <span>Check-out Date:</span>
+          <span
+            th:text="${#temporals.format(booking.checkOutDate, 'yyyy-MM-dd')}"
+          ></span>
+        </div>
+      </div>
+
+      <div class="action-buttons">
+        <a href="/bookings" class="action-button">View My Bookings</a>
+        <a href="/" class="action-button">Return to Home</a>
+      </div>
+    </div>
+  </body>
+</html>
