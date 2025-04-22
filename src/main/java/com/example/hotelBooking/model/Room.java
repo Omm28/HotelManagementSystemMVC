@@ -25,7 +25,7 @@ public class Room {
     @Column(name = "num_of_bedrooms")
     private Integer numOfBedrooms; // Changed to Integer to allow null if needed
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name = "hotel_id")
     private Hotel hotel;
 

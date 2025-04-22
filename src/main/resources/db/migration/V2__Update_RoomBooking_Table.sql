@@ -1,0 +1,3 @@
+ALTER TABLE room_booking DROP PRIMARY KEY;
+ALTER TABLE room_booking DROP COLUMN id;
+ALTER TABLE room_booking MODIFY COLUMN reservation_id VARCHAR(36) PRIMARY KEY; 

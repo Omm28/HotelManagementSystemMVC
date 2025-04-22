@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>My Bookings</title>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+    />
+    <link rel="stylesheet" href="/css/styles.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+      body {
+        font-family: "Poppins", sans-serif;
+        background-color: #f0f4f8;
+        margin: 0;
+        padding: 0;
+        color: #333;
+        line-height: 1.6;
+      }
+
+      nav {
+        background-color: #003366;
+        padding: 18px 0;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        width: 100%;
+        top: 0;
+        z-index: 1000;
+      }
+
+      .nav-container {
+        width: 90%;
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 20px;
+      }
+
+      .brand-logo {
+        font-size: 32px;
+        font-weight: 700;
+        text-decoration: none;
+        color: #ffcc00;
+        letter-spacing: 2px;
+        transition: color 0.2s ease;
+      }
+
+      .brand-logo:hover {
+        color: #ffb800;
+      }
+
+      .nav-links {
+        list-style: none;
+        display: flex;
+        gap: 35px;
+      }
+
+      .nav-links li a {
+        text-decoration: none;
+        color: #ffffff;
+        font-weight: 500;
+        font-size: 18px;
+        transition: color 0.3s ease;
+        letter-spacing: 1px;
+        padding: 8px 12px;
+        border-radius: 6px;
+      }
+
+      .nav-links li a:hover {
+        color: #ffcc00;
+        background-color: rgba(255, 204, 0, 0.1);
+      }
+
+      .bookings-container {
+        width: 90%;
+        max-width: 1200px;
+        margin: 80px auto 40px auto;
+        background-color: #ffffff;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      .bookings-header {
+        text-align: center;
+        margin-bottom: 30px;
+      }
+
+      .bookings-header h1 {
+        color: #003366;
+        font-size: 28px;
+        margin-bottom: 10px;
+      }
+
+      .bookings-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+      }
+
+      .bookings-table th,
+      .bookings-table td {
+        padding: 15px;
+        text-align: left;
+        border-bottom: 1px solid #e0e0e0;
+      }
+
+      .bookings-table th {
+        background-color: #f8f9fa;
+        color: #003366;
+        font-weight: 600;
+      }
+
+      .bookings-table tr:hover {
+        background-color: #f8f9fa;
+      }
+
+      .no-bookings {
+        text-align: center;
+        padding: 40px;
+        color: #666;
+      }
+
+      .action-button {
+        display: inline-block;
+        background-color: #ffcc00;
+        color: #003366;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+        margin: 0 5px;
+      }
+
+      .action-button:hover {
+        background-color: #ffb800;
+        transform: scale(1.04);
+      }
+
+      .status-badge {
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-size: 14px;
+        font-weight: 500;
+      }
+
+      .status-confirmed {
+        background-color: #e6f7e6;
+        color: #2e7d32;
+      }
+
+      .status-pending {
+        background-color: #fff3e0;
+        color: #e65100;
+      }
+
+      .status-cancelled {
+        background-color: #ffebee;
+        color: #c62828;
+      }
+
+      .cancel-btn {
+        display: inline-block;
+        background-color: #ff4444;
+        color: white;
+        padding: 8px 16px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 500;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      .cancel-btn:hover {
+        background-color: #cc0000;
+        transform: scale(1.04);
+      }
+
+      .cancel-btn:active {
+        transform: scale(0.98);
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <div class="nav-container">
+        <a href="/" class="brand-logo">ChillStays</a>
+        <ul class="nav-links">
+          <li><a href="/">Home</a></li>
+          <li><a href="/booking">Book Now</a></li>
+          <li><a href="/dashboard">Dashboard</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="bookings-container">
+      <div class="bookings-header">
+        <h1>My Bookings</h1>
+        <p>View and manage your current and upcoming bookings</p>
+      </div>
+
+      <div th:unless="${bookings.empty}">
+        <table class="bookings-table">
+          <thead>
+            <tr>
+              <th>Reservation ID</th>
+              <th>Hotel</th>
+              <th>Room</th>
+              <th>Check-in Date</th>
+              <th>Check-out Date</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="booking : ${bookings}">
+              <td th:text="${booking.reservationId}"></td>
+              <td th:text="${booking.hotelId}"></td>
+              <td th:text="${booking.roomId}"></td>
+              <td
+                th:text="${#temporals.format(booking.checkInDate, 'yyyy-MM-dd')}"
+              ></td>
+              <td
+                th:text="${#temporals.format(booking.checkOutDate, 'yyyy-MM-dd')}"
+              ></td>
+              <td th:text="${booking.status}"></td>
+              <td>
+                <button
+                  th:if="${booking.status == 'CONFIRMED'}"
+                  th:data-reservation-id="${booking.reservationId}"
+                  class="cancel-btn"
+                >
+                  Cancel
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="no-bookings" th:if="${#lists.isEmpty(bookings)}">
+        <p>You don't have any bookings yet.</p>
+        <a href="/booking" class="action-button">Book a Room</a>
+      </div>
+    </div>
+
+    <script>
+      $(document).ready(function () {
+        $(".cancel-btn").click(function () {
+          const reservationId = $(this).data("reservation-id");
+          $.post("/bookRoom/cancel/" + reservationId)
+            .done(function () {
+              location.reload();
+            })
+            .fail(function (error) {
+              alert("Failed to cancel booking: " + error.responseText);
+            });
+        });
+      });
+    </script>
+  </body>
+</html>

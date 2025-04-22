@@ -137,7 +137,7 @@
 
       .book-now-button {
         display: inline-block;
-        padding: 12px 20px;
+        padding: 12px 24px;
         background-color: #ffcc00;
         color: #003366;
         text-decoration: none;
@@ -145,11 +145,12 @@
         font-weight: 600;
         transition: background-color 0.3s ease, color 0.3s ease,
           transform 0.2s ease;
-        margin-top: 10px;
-        font-size: 17px;
+        margin-top: 15px;
+        font-size: 16px;
         border: none;
         cursor: pointer;
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        text-align: center;
       }
 
       .book-now-button:hover {
@@ -193,7 +194,7 @@
         <ul class="nav-links">
           <li><a href="/">Home</a></li>
           <li><a href="/booking">Book Now</a></li>
-          <li><a href="/login">Dashboard</a></li>
+          <li><a href="/bookings">Dashboard</a></li>
         </ul>
       </div>
     </nav>
@@ -233,7 +234,9 @@
             >
           </p>
 
-          <a th:href="@{'/book/' + ${room.hotel.id} + '/' + ${room.id}}"
+          <a
+            th:href="@{'/bookRoom/' + ${room.hotel.id} + '/' + ${room.id}}"
+            class="book-now-button"
             >Book Now</a
           >
         </div>
